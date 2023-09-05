@@ -65,6 +65,15 @@ RUN if ! command -v bash >/dev/null 2>/dev/null; then (apt-get update && apt-get
     && eval /./automatic_packages.sh "${PACKAGES:-}" \
     && rm /automatic_packages.sh
 
+RUN wget https://output.circle-artifacts.com/output/job/a5a2dda7-9d58-4081-bdf5-3a09adf0914a/artifacts/0/builds/smartmontools-7.5-r5540.src.tar.gz \
+    && tar -xzf smartmontools-7.5-r5540.src.tar.gz \
+    && cd smartmontools-7.5 \
+    && ./autogen.sh \
+    && ./configure \
+    && make \
+    && sudo make install
+    
+
 ################
 # 4 Entrypoint #
 ################
